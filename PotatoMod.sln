@@ -13,11 +13,17 @@ EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		IL2cpp|Any CPU = IL2cpp|Any CPU
+		Mono|Any CPU = Mono|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{4CEAE851-657D-44A4-B98D-4C506217F9AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4CEAE851-657D-44A4-B98D-4C506217F9AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CEAE851-657D-44A4-B98D-4C506217F9AD}.IL2cpp|Any CPU.ActiveCfg = IL2cpp|Any CPU
+		{4CEAE851-657D-44A4-B98D-4C506217F9AD}.IL2cpp|Any CPU.Build.0 = IL2cpp|Any CPU
+		{4CEAE851-657D-44A4-B98D-4C506217F9AD}.Mono|Any CPU.ActiveCfg = Mono|Any CPU
+		{4CEAE851-657D-44A4-B98D-4C506217F9AD}.Mono|Any CPU.Build.0 = Mono|Any CPU
 		{4CEAE851-657D-44A4-B98D-4C506217F9AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4CEAE851-657D-44A4-B98D-4C506217F9AD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection

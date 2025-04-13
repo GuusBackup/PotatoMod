@@ -1,6 +1,6 @@
 ﻿using UnityEngine.Events;
 
-namespace PotatoMod;
+namespace PotatoMod.Helpers;
 public static class Il2CppHelper
 {
     public static UnityAction<T> ToUnityAction<T>(this Action<T> action)
