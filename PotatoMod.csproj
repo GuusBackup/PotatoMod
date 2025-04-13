@@ -1,0 +1,71 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  
+  <PropertyGroup>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <RootNamespace>PotatoMod</RootNamespace>
+    <LangVersion>default</LangVersion>
+    <IsPackable>false</IsPackable>
+    <AssemblyVersion>1.0.3</AssemblyVersion>
+    <FileVersion>1.0.3</FileVersion>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <AssemblyName>PotatoMod</AssemblyName>
+    <LangVersion>latest</LangVersion>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+  </PropertyGroup>
+  
+  <PropertyGroup>
+    <RandomGuid>$([System.Guid]::NewGuid().ToString())</RandomGuid>
+    <GameDir>C:\Program Files (x86)\Steam\steamapps\common\Schedule I</GameDir>
+    <!--<Mono>False</Mono>-->
+  </PropertyGroup>
+  
+  <ItemGroup Condition="'$(Mono)'=='True'">
+    <PackageReference Include="BepInEx.AssemblyPublicizer.MSBuild" Version="0.4.2" PrivateAssets="all" />
+    <Reference Include="$(GameDir)\Schedule I_Data\Managed\Unity*.dll" />
+    <Reference Include="$(GameDir)\Schedule I_Data\Managed\FishNet*.dll" /> 
+    <Reference Remove="$(GameDir)\Schedule I_Data\Managed\Assembly-CSharp.dll" />
+    <Reference Include="$(GameDir)\Schedule I_Data\Managed\Assembly-CSharp.dll" Publicize="true" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(Mono)'!='True'">
+    <Reference Include="$(GameDir)\MelonLoader\Il2CppAssemblies\*.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="MelonLoader">
+      <HintPath>$(GameDir)\MelonLoader\net6\MelonLoader.dll</HintPath>
+    </Reference>
+    <Reference Include="0Harmony">
+      <HintPath>$(GameDir)\MelonLoader\net6\0Harmony.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2CppInterop.Runtime">
+      <HintPath>$(GameDir)\MelonLoader\net6\Il2CppInterop.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2CppInterop.Common">
+      <HintPath>$(GameDir)\MelonLoader\net6\Il2CppInterop.Common.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <Choose>
+    <When Condition="'$(Mono)' == 'True'">
+      <PropertyGroup>
+        <TargetFramework>netstandard2.1</TargetFramework>
+      </PropertyGroup>
+    </When>
+    <Otherwise>
+      <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+      </PropertyGroup>
+    </Otherwise>
+  </Choose>
+
+  <PropertyGroup Condition="'$(Mono)'=='True'">
+    <DefineConstants>Mono</DefineConstants>
+  </PropertyGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Move SourceFiles="$(GameDir)\Mods\$(TargetFileName)" DestinationFiles="$(GameDir)\tmp\$(TargetFileName)_$(RandomGuid)" Condition="Exists('$(GameDir)\Mods\$(TargetFileName)')" />
+    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(GameDir)\Mods\" Retries="60" />
+  </Target>
+</Project>

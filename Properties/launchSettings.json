@@ -1,0 +1,16 @@
+{
+  "profiles": {
+    "PotatoMod Mono": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "Mono": "True"
+      }
+    },
+    "PotatoMod ill2cpp": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "Mono": "False"
+      }
+    }
+  }
+}
